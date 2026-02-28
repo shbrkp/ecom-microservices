@@ -1,13 +1,18 @@
 spring:
   data:
     mongodb:
-      uri: mongodb://localhost:27017/userdb
+      uri: mongodb://localhost:270174/userdb
       database: userdb
       #uri: mongodb+srv://shbrkp_db_user:Vomjpr3XCe9dwlpx@user-ecom.ndirevd.mongodb.net/userdb?retryWrites=true&w=majority&appName=user-ecom
   application:
     name: user-service
-  profiles:
-    active: dev
+
+build:
+  id: 101
+  version: v101
+  name: "dev-build1"
+  type: "development build"
+
 
 #  datasource:
 #    url: jdbc:postgresql://localhost:5432/userdb
