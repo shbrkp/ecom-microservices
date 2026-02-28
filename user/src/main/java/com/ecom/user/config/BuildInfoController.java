@@ -1,0 +1,30 @@
+package com.ecom.user.config;
+
+import org.springframework.beans.factory.annotation.Value;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.RestController;
+
+@RestController
+public class BuildInfoController {
+
+    @Value("${BUILD.ID:default}")
+    private String buildId;
+
+
+    @Value("${JAVA_HOME:default}")
+    private String buildName;
+
+//    http://localhost:8082/build-info
+    @GetMapping("/build-info")
+    public String getbuildInfo(){
+        return "Build Id :"+buildId+"Build Id small  Build Nmae :"+buildName;
+
+    }
+}
+
+
+//build:
+//id: 101
+//version: v101
+//name: "dev-build"
+//type:

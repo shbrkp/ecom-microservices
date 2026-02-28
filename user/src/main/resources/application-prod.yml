@@ -6,8 +6,13 @@ spring:
       #uri: mongodb+srv://shbrkp_db_user:Vomjpr3XCe9dwlpx@user-ecom.ndirevd.mongodb.net/userdb?retryWrites=true&w=majority&appName=user-ecom
   application:
     name: user-service
-  profiles:
-    active: dev
+
+build:
+  id: 101
+  version: v101
+  name: "production-build"
+  type: "production build"
+
 
 #  datasource:
 #    url: jdbc:postgresql://localhost:5432/userdb

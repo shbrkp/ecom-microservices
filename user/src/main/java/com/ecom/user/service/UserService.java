@@ -31,7 +31,9 @@ public class UserService {
     public void adduser(UserRequest userRequest){
         User user = new User();
         updateUserFromRequest(user,userRequest);
-        userRepository.save(user);
+        System.out.println("user---->"+user.getId());
+        user = userRepository.save(user);
+        System.out.println("user---->"+user.getId());
     }
 
     private void updateUserFromRequest(User user,UserRequest userRequest) {
@@ -49,7 +51,7 @@ public class UserService {
         }
     }
 
-    public boolean updateUser(UserRequest updatedUserrequest, Long id){
+    public boolean updateUser(UserRequest updatedUserrequest, String id){
 
         // code for getting list and seraching and then update
         /*userList = userRepository.findAll();
@@ -66,10 +68,10 @@ public class UserService {
                 .orElse(false);*/
         // code for getting object and then update
 
-        return userRepository.findById(id)
+        return userRepository.findById(String.valueOf(id))
                 .map(existingUser -> {
                     updateUserFromRequest(existingUser,updatedUserrequest);
-                    existingUser.setId(id);
+                    existingUser.setId(String.valueOf(id));
                     userRepository.save(existingUser);
                     return true;
                 })
@@ -83,7 +85,7 @@ public class UserService {
         userRepository.save(user);*/
     }
 
-    public Optional<UserResponse> fetchUser(Long id)
+    public Optional<UserResponse> fetchUser(String id)
     {
 
         /*return userList.stream()
@@ -91,7 +93,7 @@ public class UserService {
 
       // return userRepository.findById(id);
 
-        return userRepository.findById(id)
+        return userRepository.findById(String.valueOf(id))
                 .map(this::mapToUserResponse);
     }
 

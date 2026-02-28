@@ -1,16 +1,13 @@
 package com.ecom.user.model;
 
-import jakarta.persistence.*;
 import lombok.Data;
 import lombok.NoArgsConstructor;
+import org.springframework.data.annotation.Id;
 
-@Entity
 @Data
-@Table(name = "addresses")
 @NoArgsConstructor
 public class Address {
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
     private String street;
