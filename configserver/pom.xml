@@ -5,14 +5,14 @@
 	<parent>
 		<groupId>org.springframework.boot</groupId>
 		<artifactId>spring-boot-starter-parent</artifactId>
-		<version>4.0.2</version>
+		<version>4.0.3</version>
 		<relativePath/> <!-- lookup parent from repository -->
 	</parent>
 	<groupId>com.ecom</groupId>
-	<artifactId>user</artifactId>
+	<artifactId>configserver</artifactId>
 	<version>0.0.1-SNAPSHOT</version>
-	<name>user</name>
-	<description>User project for Spring Boot</description>
+	<name>configserver</name>
+	<description>Demo project for Spring Boot</description>
 	<url/>
 	<licenses>
 		<license/>
@@ -32,54 +32,15 @@
 	</properties>
 	<dependencies>
 		<dependency>
-			<groupId>org.springframework.boot</groupId>
-			<artifactId>spring-boot-starter-webmvc</artifactId>
-		</dependency>
-		<dependency>
 			<groupId>org.springframework.cloud</groupId>
-			<artifactId>spring-cloud-starter-config</artifactId>
+			<artifactId>spring-cloud-config-server</artifactId>
 		</dependency>
-		<!--<dependency>
-			<groupId>org.springframework.boot</groupId>
-			<artifactId>spring-boot-starter-data-jpa</artifactId>
-		</dependency>-->
-		<dependency>
-			<groupId>org.springframework.cloud</groupId>
-			<artifactId>spring-cloud-starter-netflix-eureka-client</artifactId>
-		</dependency>
-		<!--<dependency>
-			<groupId>org.springframework.boot</groupId>
-			<artifactId>spring-boot-starter-data-jpa-test</artifactId>
-			<scope>test</scope>
-		</dependency>-->
+
 		<dependency>
 			<groupId>org.springframework.boot</groupId>
-			<artifactId>spring-boot-starter-data-mongodb</artifactId>
-		</dependency>
-		<dependency>
-			<groupId>org.springframework.boot</groupId>
-			<artifactId>spring-boot-starter-webmvc-test</artifactId>
+			<artifactId>spring-boot-starter-test</artifactId>
 			<scope>test</scope>
 		</dependency>
-		<dependency>
-			<groupId>org.projectlombok</groupId>
-			<artifactId>lombok</artifactId>
-			<optional>true</optional>
-		</dependency>
-		<!--<dependency>
-			<groupId>org.postgresql</groupId>
-			<artifactId>postgresql</artifactId>
-			<scope>runtime</scope>
-		</dependency>-->
-		<!--<dependency>
-			<groupId>com.h2database</groupId>
-			<artifactId>h2</artifactId>
-			<scope>runtime</scope>
-		</dependency>
-		<dependency>
-			<groupId>org.springframework.boot</groupId>
-			<artifactId>spring-boot-h2console</artifactId>
-		</dependency>-->
 	</dependencies>
 	<dependencyManagement>
 		<dependencies>
