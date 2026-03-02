@@ -1,7 +1,12 @@
 package com.ecom.order.service;
 
+import com.ecom.order.clients.ProductServiceClient;
+import com.ecom.order.clients.UserServiceClient;
 import com.ecom.order.dto.CartItemRequest;
+import com.ecom.order.dto.ProductResponse;
+import com.ecom.order.dto.UserResponse;
 import com.ecom.order.model.CartItem;
+import com.ecom.order.repository.CartItemRepository;
 import jakarta.transaction.Transactional;
 import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Service;
@@ -16,10 +21,27 @@ import java.util.Optional;
 public class CartService {
     /*public final UserRepository userRepository;
     public final ProductRepository productRepository;*/
-    public final com.ecom.order.repository.CartItemRepository cartItemRepository;
+    public final CartItemRepository cartItemRepository;
+    public final ProductServiceClient productServiceClient;
+    public final UserServiceClient userServiceClient;
     public boolean addToCart(String userId, CartItemRequest cartItemRequest){
         // checking whether the user is valid
-//        Optional<User> userOpt =  userRepository.findById(Long.valueOf(userId));
+        ProductResponse productResponse = productServiceClient.getProductDetails(cartItemRequest.getProductId());
+        if(productResponse == null ) {
+            System.out.println("CartService::addToCart()----Product Response is null---");
+            return false;
+        }
+        System.out.println("CartService::addToCart()----Product Response is ---"+productResponse.getId());
+        if(productResponse.getStockQuantity()  < cartItemRequest.getQuantity() )
+            return false;
+
+        UserResponse userResponse = userServiceClient.getUserDetails(userId);
+        if(userResponse == null ) {
+            System.out.println("CartService::addToCart()----User Response is null---");
+            return false;
+        }
+        System.out.println("CartService::addToCart()----User Response is ---"+userResponse.getId());
+//       Optional<User> userOpt =  userRepository.findById(Long.valueOf(userId));
 //        if(userOpt.isEmpty())
 //            return false;
 //

@@ -1,6 +1,5 @@
-package com.ecom.user.dto;
+package com.ecom.order.dto;
 
-import com.ecom.user.model.UserRole;
 import lombok.Data;
 
 @Data
@@ -11,6 +10,6 @@ public class UserResponse {
     private String lastName;
     private String email;
     private String phone;
-    private com.ecom.user.model.UserRole role;
+    private UserRole role;
     private AddressDTO addressDTO;
 }
