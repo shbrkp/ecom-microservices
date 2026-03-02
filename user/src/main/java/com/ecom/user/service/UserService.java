@@ -101,7 +101,7 @@ public class UserService {
         UserResponse userResponse =  new UserResponse();
         userResponse.setFirstName(user.getFirstName());
         userResponse.setLastName(user.getLastName());
-        //userResponse.setId(String.valueOf(user.getId()));
+        userResponse.setId(user.getId());
         userResponse.setEmail(user.getEmail());
         userResponse.setPhone(user.getPhone());
         userResponse.setRole(user.getRole());

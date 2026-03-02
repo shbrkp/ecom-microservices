@@ -26,11 +26,11 @@ public class CartController {
         return ResponseEntity.status(HttpStatus.CREATED).build();
     }
 
-    @DeleteMapping("/items/{productId}")
+    @DeleteMapping("/items/{id}")
     public ResponseEntity<String> deleteCartItem(
             @RequestHeader("X-User-ID")  String userId,
-            @PathVariable String productId){
-        if(!cartService.deleteCartItem(userId,productId))
+            @PathVariable String id){
+        if(!cartService.deleteCartItem(userId,id))
             return ResponseEntity.badRequest().body("Invalid product or invalid user");
         return ResponseEntity.noContent().build();
     }
