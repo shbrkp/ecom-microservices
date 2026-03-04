@@ -5,6 +5,9 @@ import com.ecom.user.dto.UserResponse;
 import com.ecom.user.service.UserService;
 import jakarta.annotation.PostConstruct;
 import lombok.AllArgsConstructor;
+import lombok.extern.slf4j.Slf4j;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.core.env.Environment;
 import org.springframework.data.mongodb.core.MongoTemplate;
@@ -16,9 +19,11 @@ import java.util.List;
 
 @RestController
 @AllArgsConstructor
+@Slf4j
 public class UserController {
     private final UserService userService;
     private List<UserResponse> userList = new ArrayList<>();
+    //private static Logger logger = LoggerFactory.getLogger(UserController.class);
 
     @Autowired
     Environment env;
@@ -39,7 +44,7 @@ public class UserController {
     @PostConstruct
     public void checkDb() {
         System.out.println("Connected DB: " + mongoTemplate.getDb().getName());
-        System.out.println("Connected DB: " + mongoTemplate.getDb().getName());
+        log.info("Connected DB : {}",mongoTemplate.getDb().getName());
        // System.out.println("Connected Host: " + mongoTemplate.getDb()..getMongoClient().getClusterDescription());
     }
     @PostConstruct
@@ -64,7 +69,7 @@ public class UserController {
         if(user.isEmpty()) sample changes in new branch
             return ResponseEntity.notFound().build();
         return ResponseEntity.ok(userService.fetchUser(id));*/
-
+        log.info("Request received for user : {}",id);
 
         return userService.fetchUser(id)
                 .map(ResponseEntity::ok)
