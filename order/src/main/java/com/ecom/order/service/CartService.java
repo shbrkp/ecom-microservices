@@ -7,8 +7,11 @@ import com.ecom.order.dto.ProductResponse;
 import com.ecom.order.dto.UserResponse;
 import com.ecom.order.model.CartItem;
 import com.ecom.order.repository.CartItemRepository;
+import io.github.resilience4j.circuitbreaker.annotation.CircuitBreaker;
+import io.github.resilience4j.retry.annotation.Retry;
 import jakarta.transaction.Transactional;
 import lombok.AllArgsConstructor;
+import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
 import java.math.BigDecimal;
@@ -16,7 +19,7 @@ import java.util.List;
 import java.util.Optional;
 
 @Service
-@AllArgsConstructor
+@RequiredArgsConstructor
 @Transactional
 public class CartService {
     /*public final UserRepository userRepository;
@@ -24,8 +27,13 @@ public class CartService {
     public final CartItemRepository cartItemRepository;
     public final ProductServiceClient productServiceClient;
     public final UserServiceClient userServiceClient;
+    Integer attempt = 0;
+
+    //@CircuitBreaker(name="productService", fallbackMethod = "addToCartFallBack")
+    @Retry(name="retryService", fallbackMethod = "addToCartFallBack")
     public boolean addToCart(String userId, CartItemRequest cartItemRequest){
         // checking whether the user is valid
+        System.out.println("attempt-----"+ ++attempt);
         ProductResponse productResponse = productServiceClient.getProductDetails(cartItemRequest.getProductId());
         if(productResponse == null ) {
             System.out.println("CartService::addToCart()----Product Response is null---");
@@ -73,6 +81,13 @@ public class CartService {
             cartItemRepository.save(cartItem);
         }
         return true;
+    }
+
+    public boolean addToCartFallBack(String userId,
+                                     CartItemRequest cartItemRequest,
+                                     Exception ex){
+        System.out.println("Fallback method called");
+        return false;
     }
 
     public boolean deleteCartItem(String userId, String productId) {

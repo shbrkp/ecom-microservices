@@ -8,6 +8,7 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import java.lang.invoke.MethodHandles;
 import java.util.List;
 import java.util.Optional;
 
@@ -16,6 +17,16 @@ import java.util.Optional;
 @RequestMapping("/api/products")
 public class ProductController {
     private final ProductService productService;
+
+
+    @GetMapping("/simulateFailure")
+    public ResponseEntity<String> simulateFailure(
+            @RequestParam(defaultValue = "false") boolean fail){
+        if(fail) {
+            throw new RuntimeException("Simulate failed for testing");
+        }
+        return ResponseEntity.ok("productService is ok");
+    }
 
     @PostMapping
     public ResponseEntity<ProductResponse> createProduct(@RequestBody ProductRequest productRequest){
