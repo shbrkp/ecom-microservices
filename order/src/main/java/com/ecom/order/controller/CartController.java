@@ -22,7 +22,7 @@ public class CartController {
             @RequestHeader("X-User-ID") String userId,
             @RequestBody CartItemRequest cartItemRequest){
         if(!cartService.addToCart(userId,cartItemRequest))
-            return ResponseEntity.badRequest().body("Invalid product or less quantity or invalid user");
+            return ResponseEntity.badRequest().body("Service my be unavailable or Invalid product or less quantity or invalid user");
         return ResponseEntity.status(HttpStatus.CREATED).build();
     }
 
